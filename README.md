@@ -55,7 +55,7 @@ cd backend
 node local.js
 ```
 
-The backend should now run at http://localhost:3000 (or the port you set in .env).
+The backend should now run at http://localhost:3000.
 
 Open the frontend
 
