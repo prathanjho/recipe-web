@@ -11,16 +11,16 @@ Requirements
 -Setup Instructions
 -Clone the repository
 
-**
+```bash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
 cd YOUR_REPO
-**
+```
 
 Install dependencies
 
-**
+```bash
 npm install
-**
+```
 
 Configure backend
 
@@ -29,31 +29,31 @@ Go to the frontend folder and open config.js.
 Change the backend_url variable to point to your backend server.
 Example:
 
-**
+```bash
 const backend_url = "http://localhost:3000";
-**
+```
 
 Setup environment variables
 
 Copy .env.template to .env in the root folder:
 
-**
+```bash
 cp .env.template .env
-**
+```
 
 Open .env and fill in your credentials:
 
-**
+```bash
 MONGO_URI=<your MongoDB URI>
 GEMINI_API_KEY=<your Gemini API key>
-**
+```
 
 Start the server
 
-**
+```bash
 cd backend
 node local.js
-**
+```
 
 The backend should now run at http://localhost:3000 (or the port you set in .env).
 
