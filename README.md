@@ -11,16 +11,6 @@ Requirements
 - Setup Instructions
 - Clone the repository
   
-```bash
-# Navigate to backend folder
-cd backend
-
-# Initialize npm if you haven't already
-npm init -y
-
-# Install backend dependencies
-npm install express mongoose bcrypt dotenv cors axios
-
 ```
 
 ```bash
@@ -31,6 +21,7 @@ cd YOUR_REPO
 Install dependencies
 
 ```bash
+cd backend
 npm install
 ```
 
