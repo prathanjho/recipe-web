@@ -4,12 +4,24 @@ Part of final project of Intro to CEDT Chula
 INORDER TO RUN ON LOCAL COMPUTER
 Requirements
 
--Node.js (v18+ recommended)
--npm
--MongoDB Atlas account or local MongoDB
--API token for Gemini (or any other recipe AI API, required changing API-request method in local.js file-backend folder)
--Setup Instructions
--Clone the repository
+- Node.js (v18+ recommended)
+- npm
+- MongoDB Atlas account or local MongoDB
+- API token for Gemini (or any other recipe AI API, required changing API-request method in local.js file-backend folder)
+- Setup Instructions
+- Clone the repository
+  
+```bash
+# Navigate to backend folder
+cd backend
+
+# Initialize npm if you haven't already
+npm init -y
+
+# Install backend dependencies
+npm install express mongoose bcrypt dotenv cors axios
+
+```
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
