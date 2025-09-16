@@ -1,5 +1,4 @@
 const BACKEND_URL = 'http://3.94.163.181:3000';
-const GEMINI_API_KEY = "AIzaSyAVNJJDkcvhDWBSSOIVt9XW6kE-7UB1Xpo";
 document.getElementById('signUpModal').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -174,3 +173,4 @@ findBtn.addEventListener('click', async (e) => {
     loadingSpinner.style.display = "none";
     recipeResultContent.style.display = "block";
 });
+
