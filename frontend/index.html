@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <nav>
+                <a href="#" class="nav-link" id="Recipe">Recipe</a>
+                <a href="#" class="nav-link" id="History">History</a>
+            </nav>
+            <button class="btn-login-header" id="showLoginBtn">Log in</button>
+        </div>
+    </header>
+    <!-- Modal Overlay -->
+
+    <div id="logoutModal" class="logout-modal">
+        <div class="logout-modal-content">
+            <p>Are you sure you want to log out?</p>
+            <button id="confirmLogout">Yes</button>
+            <button id="cancelLogout">No</button>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-watch" id="viewRecipeModal">
+
+            <!-- Modal Content -->
+            <div class="recipe-details-content">
+
+                <!-- Food Allergy -->
+                <div class="recipe-detail-group">
+                    <label>Food Allergy</label>
+                    <div class="detail-box" id="allergy">None</div>
+                </div>
+
+                <!-- Description -->
+                <div class="recipe-detail-group">
+                    <label>Description</label>
+                    <div class="detail-box" id="description">None</div>
+                </div>
+
+                <!-- Ingredients + Instructions side by side -->
+                <div class="recipe-columns">
+                    <div class="recipe-detail-group">
+                        <label>Ingredients</label>
+                        <ul id="ingredients">
+                            <li>None</li>
+                        </ul>
+                    </div>
+
+                    <div class="recipe-detail-group">
+                        <label>Instructions</label>
+                        <ol id="instructions">
+                            <li>None</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <h3 id="recipe-title">Untitled Recipe</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+        </div>
+        <div class="modal-watch" id="generatedRecipeModal">
+            <div class="loading-spinner" id="loadingSpinner"></div>
+
+            <div class="recipe-details-content" id="result-content">
+
+                <div class="recipe-detail-group">
+                    <label>Food Allergy</label>
+                    <div class="detail-box" id="modal-allergy">None</div>
+                </div>
+
+                <div class="recipe-detail-group">
+                    <label>Descriptions</label>
+                    <div class="detail-box" id="modal-description">None</div>
+                </div>
+
+                <div class="recipe-columns">
+                    <div class="recipe-detail-group">
+                        <label>Ingredients</label>
+                        <ul id="modal-ingredients"></ul>
+                    </div>
+                    <div class="recipe-detail-group">
+                        <label>Instructions</label>
+                        <ol id="modal-instructions"></ol>
+                    </div>
+                </div>
+
+                <div class="recipe-modal-save">
+                    <button type="submit" class="btn-save">Save</button>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <h3 id="modal-recipe-title">Untitled Recipe</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+        </div>
+
+
+        <div class="modal-container modal-confirm" id="confirmDeleteModal">
+            <h2>Confirm?</h2>
+            <div class="loading-spinner" id="deleteLoadingSpinner" style="display:none;"></div>
+            <div class="confirm-buttons">
+                <button class="btn-confirm-yes" id="confirmYesBtn">YES</button>
+                <button class="btn-confirm-no" id="confirmNoBtn">NO</button>
+            </div>
+        </div>
+
+        <div class="modal-container" id="signInModal">
+            <button class="close-btn" data-target="signInModal">&times;</button>
+            <h2>SIGN IN</h2>
+            <form>
+                <div class="form-group">
+                    <label for="signin-username">Username</label>
+                    <input type="text" id="signin-username" name="username" required>
+                    <div id="user-not-accept" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signin-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="signin-password" name="password" required>
+                        <i class="fas fa-eye-slash toggle-password"></i>
+                    </div>
+                </div>
+                <div id="Pass-not-accept" class="error-message"></div>
+                <a href="#" class="switch-link" id="showSignUpLink">Don't have an account?</a>
+                <button type="submit" class="btn-submit">Login</button>
+            </form>
+        </div>
+
+        <div class="modal-container" id="signUpModal">
+            <button class="close-btn" data-target="signUpModal">&times;</button>
+            <h2>SIGN UP</h2>
+            <form>
+                <div class="form-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" name="username" required>
+                    <div id="username-not-acceptable" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="signup-password" name="password" required>
+                        <i class="fas fa-eye-slash toggle-password"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="signup-confirm-password" name="confirm-password" required>
+                        <i class="fas fa-eye-slash toggle-password"></i>
+                    </div>
+                </div>
+                <div id="final-stage-error" class="error-message"></div>
+                <a href="#" class="switch-link" id="showSignInLink">Already have an account?</a>
+                <button type="submit" class="btn-submit">submit</button>
+            </form>
+
+        </div>
+        <div id="success" class="success-popup">
+            <p id="popup-message">Signup successful!</p>
+            <button id="ok-button" class="success-ok">OK</button>
+        </div>
+
+    </div>
+    <section id="recipe-page" class="page active">
+        <div class="recipe-finder-v2">
+            <h1 class="finder-title">Find the Perfect Recipe</h1>
+            <p class="finder-subtitle">Tell us a bit about your needs, and we'll find something delicious for you.
+            </p>
+
+            <form class="recipe-form-v2" id="recipeForm">
+                <div class="form-card">
+                    <h2 class="card-title">Dietary Needs</h2>
+                    <label for="menu-name" class="input-label-v2">Menu Name (Optional)</label>
+                    <div class="input-group-v2">
+                        <i class="fas fa-utensils"></i>
+                        <input type="text" id="menu-name" name="menu_name"
+                            placeholder="Name of dish you have in mind...">
+                    </div>
+                    <label for="food-allergy" class="input-label-v2">Food Allergies</label>
+                    <div class="input-group-v2">
+                        <i class="fas fa-allergies"></i>
+                        <input type="text" id="food-allergy" name="food_allergy"
+                            placeholder="e.g., Peanuts, Shellfish, Gluten">
+                    </div>
+                    <label for="specific-descriptions" class="input-label-v2">Specific Descriptions</label>
+                    <div class="input-group-v2">
+                        <i class="fas fa-comment-dots"></i>
+                        <input type="text" id="specific-descriptions" name="specific_descriptions"
+                            placeholder="e.g., Spicy, Low-carb, Vegan">
+                    </div>
+                </div>
+                <div class="form-card">
+                    <h2 class="card-title">Personal Info</h2>
+                    <div class="inline-inputs">
+                        <div>
+                            <label for="age" class="input-label-v2">Age</label>
+                            <div class="input-group-v2">
+                                <i class="fas fa-birthday-cake"></i>
+                                <input type="number" id="age" name="age" placeholder="e.g., 35">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="gender" class="input-label-v2">Gender</label>
+                            <div class="input-group-v2">
+                                <i class="fas fa-venus-mars"></i>
+                                <select id="gender" name="gender">
+                                    <option value="" disabled selected>Select gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer_not_to_say">Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="congenital-disease" class="input-label-v2">Health Conditions</label>
+                    <div class="input-group-v2">
+                        <i class="fas fa-notes-medical"></i>
+                        <input type="text" id="congenital-disease" name="congenital_disease"
+                            placeholder="e.g., Diabetes, High blood pressure">
+                    </div>
+                </div>
+                <div class="submit-area-v2">
+                    <button type="submit" class="btn-find-recipe-v2">
+                        <i class="fas fa-search"></i> Find My Recipe
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section id="history-page" class="page">
+        <div class="history-container">
+            <h2>Your Recipe History</h2>
+            <div class="history-list" id="historyList">
+                <div class="history-list-inner">
+
+                </div>
+                <div class="history-text" id="text-to-show">
+                    <p class="no-history">You haven't generated any recipes yet.</p>
+                    <p class="go-generate" id="go-recipe">Want to generate recipes?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
