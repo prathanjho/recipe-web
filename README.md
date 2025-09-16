@@ -23,6 +23,7 @@ Install dependencies
 ```bash
 cd backend
 npm install
+npm install axios
 ```
 
 Configure backend
