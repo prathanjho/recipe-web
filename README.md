@@ -11,8 +11,6 @@ Requirements
 - Setup Instructions
 - Clone the repository
   
-```
-
 ```bash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
 cd YOUR_REPO
@@ -23,7 +21,6 @@ Install dependencies
 ```bash
 cd backend
 npm install
-npm install axios
 ```
 
 Configure backend
